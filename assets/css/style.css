@@ -375,6 +375,12 @@ table {
   min-width:00px;
   box-shadow: rgba(0, 0, 0, 1) 0px 0px 0px 1px inset;
 }
+.table tr td a img{
+  width: 20px;
+}
+.table tr td a{
+  color: #fff;
+}
 th {
   background-color: #161b22 !important;
   text-align: center;
@@ -511,4 +517,7 @@ select {
   padding: 3px 10px;
   border-radius: 5px;
   font-size: 15px;
+}
+.bg-white-5{
+  background-color: #FFFFFF0D;
 }
