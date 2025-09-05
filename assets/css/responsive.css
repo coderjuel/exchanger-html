@@ -1,9 +1,9 @@
 @media all and (max-width: 1400px) {
+  .circle-effect-2 {
+    right: 0%;
+    top: -6%;
 }
-
-@media all and (max-width: 1200px) {
 }
-
 @media all and (max-width: 991px) {
   .exchange-card {
     padding: 30px 15px;
@@ -50,10 +50,19 @@
 }
 
 @media all and (max-width: 767px) {
+  .custom-modal{
+    padding: 30px 15px;
+  }
   .outline-btn {
     padding: 2px 5px;
     gap: 4px;
     font-size: 15px;
+  }
+  .compare-box button{
+    display: none;
+  }
+  .exchange-info-list li{
+    font-size: 14px;
   }
 }
 

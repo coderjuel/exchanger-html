@@ -89,7 +89,7 @@
                 class="bank-card py-1 px-1 py-md-2 px-md-3 rounded-2 d-flex align-items-center gap-4"
               >
                 <ul class="d-flex align-items-center gap-2">
-                  <li>
+                  <li class="d-flex align-items-center">
                     <img src="assets/images/icon/bank-2.svg" alt="icon" />
                   </li>
                   <li>EBL Bank, 3311440015641</li>
@@ -106,7 +106,7 @@
                   class="d-flex gap-lg-5 gap-2 justify-content-between flex-wrap flex-md-nowrap"
                 >
                   <!-- single card -->
-                  <div class="exchange-card w-100 h-100">
+                  <div class="exchange-card w-100">
                     <div
                       class="exchange-card-header d-flex align-items-center justify-content-between gap-1"
                     >
@@ -122,7 +122,9 @@
                     </div>
                     <div class="exchange-card-body">
                       <form action="">
-                        <div class="d-flex align-items-end gap-1">
+                        <div
+                          class="d-flex align-items-end gap-1 justify-content-between"
+                        >
                           <div class="user-input">
                             <span class="form-label">Amount</span>
                             <input
@@ -138,24 +140,47 @@
                     </div>
                   </div>
                   <!-- single card -->
-                  <div class="exchange-card w-100 h-100">
+                  <div class="exchange-card w-100">
                     <div
                       class="exchange-card-header d-flex align-items-center justify-content-between gap-1"
                     >
                       <p class="m-0">Processing Fee : 0%</p>
-                      <div class="coin-box">
-                        <select name="" id="">
-                          <option value="">
+                      <div class="coin-box position-relative">
+                        <div
+                          class="custom-select-box"
+                          onclick="toggleDropdown()"
+                        >
+                          <div
+                            id="currencyIconBox"
+                            class="currencyIconBox"
+                          ></div>
+                          <span class="selected-text" id="selectedText"
+                            ><img src="assets/images/icon/bdt.png" alt="" />
+                            BDT</span
+                          >
+                          <span class="dropdown-arrow"
+                            ><img
+                              src="assets/images/icon/arrow-down.png"
+                              alt=""
+                          /></span>
+                        </div>
+
+                        <ul class="dropdown-list" id="dropdownList">
+                          <li onclick="selectCurrency(this)">
                             <img src="assets/images/icon/bdt.png" alt="" /> BDT
-                          </option>
-                          <option value="">AED</option>
-                        </select>
+                          </li>
+                          <li onclick="selectCurrency(this)">
+                            <img src="assets/images/icon/aed.png" alt="" /> AED
+                          </li>
+                        </ul>
                       </div>
                     </div>
 
                     <div class="exchange-card-body">
                       <form action="">
-                        <div class="d-flex align-items-end gap-1">
+                        <div
+                          class="d-flex align-items-end gap-1 justify-content-between"
+                        >
                           <div class="user-input">
                             <span class="form-label">Amount</span>
                             <input
@@ -164,6 +189,9 @@
                               placeholder="Type Here"
                               value="0.735377"
                             />
+                            <p class="m-0">
+                              Exchange Rate : 1 ECM ≈ 146.13 BDT
+                            </p>
                           </div>
                           <p class="m-0 fs-4">ECM</p>
                         </div>
@@ -194,6 +222,233 @@
       </div>
     </section>
     <!-- End exchanger area -->
+    <!-- confirm-modal -->
+    <div
+      class="modal fade bg-gradient-add"
+      id="confirm-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-md">
+        <div class="modal-content custom-modal">
+          <!-- <div class="modal-header-area d-flex align-items-center justify-content-between">
+                        <h4 class="text-shadow">Log In</h4>
+                        <div class="modal-close-btn">
+                           <span data-bs-dismiss="modal" aria-label="Close">
+                           <i class="fas fa-times"></i>
+                           </span>
+                        </div>
+                     </div> -->
+          <div class="modal-body-inner">
+            <h4 class="title-md text-center">Confirm Transaction</h4>
+            <p class="text-center mt-4">
+              Are you sure you want to confirm this transaction? Once confirmed,
+              this action cannot be undone.
+            </p>
+          </div>
+          <div
+            class="d-flex align-items-center justify-content-between modal-footer-area flex-wrap mt-5"
+          >
+            <span
+              class="primary-square-btn border-color-gray text-white pointer"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <img src="assets/images/icon/close-square.svg" alt="icon" />
+              Cancel</span
+            >
+            <button class="primary-square-btn bg-yellow">
+              <img src="assets/images/icon/circle-check.svg" alt="icon" />
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- confirm-modal -->
+    <div
+      class="modal fade bg-gradient-add"
+      id="add-bulk-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-md">
+        <div class="modal-content custom-modal">
+          <form action="">
+            <div
+              class="modal-header-area d-flex align-items-center justify-content-between"
+            >
+              <h4 class="text-shadow">Bulk Transactions Set</h4>
+              <div class="modal-close-btn">
+                <span data-bs-dismiss="modal" aria-label="Close">
+                  <i class="fas fa-times"></i>
+                </span>
+              </div>
+            </div>
+            <div class="modal-body-inner">
+              <div class="form-items d-flex flex-column gap-3 mt-4">
+                <!-- item -->
+                <div class="input-item">
+                  <label for="receiver-address" class="form-label"
+                    >Receiver Address</label
+                  >
+                  <div class="input-group">
+                    <span class="d-flex align-items-center"
+                      ><img src="assets/images/icon/bank.svg" alt="user"
+                    /></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="receiver-address"
+                      placeholder="0x88...C4Ea"
+                    />
+                  </div>
+                </div>
+                <!-- item -->
+                <div class="input-item">
+                  <label for="amount" class="form-label">Amount (ECM)</label>
+                  <div class="input-group">
+                    <span class="d-flex align-items-center"
+                      ><img src="assets/images/icon/ac-number.svg" alt="user"
+                    /></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="amount"
+                      placeholder="500 ECM"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="d-flex align-items-center justify-content-end modal-footer-area flex-wrap mt-5"
+            >
+              <button class="primary-square-btn bg-yellow">
+                <img src="assets/images/icon/circle-check.svg" alt="icon" /> Add
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- remove-modal -->
+    <div
+      class="modal fade bg-gradient-add"
+      id="remove-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-md">
+        <div class="modal-content custom-modal">
+          <!-- <div class="modal-header-area d-flex align-items-center justify-content-between">
+                        <h4 class="text-shadow">Log In</h4>
+                        <div class="modal-close-btn">
+                           <span data-bs-dismiss="modal" aria-label="Close">
+                           <i class="fas fa-times"></i>
+                           </span>
+                        </div>
+                     </div> -->
+          <div class="modal-body-inner">
+            <h4 class="title-md text-center">Remove Address</h4>
+            <p class="text-center mt-4">
+              Are you sure you want to remove this Address from the list?
+            </p>
+          </div>
+          <div
+            class="d-flex align-items-center justify-content-between modal-footer-area flex-wrap mt-5"
+          >
+            <span
+              class="primary-square-btn border-color-gray text-white pointer"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <img src="assets/images/icon/close-square.svg" alt="icon" />
+              Cancel</span
+            >
+            <button class="primary-square-btn bg-yellow">
+              <img src="assets/images/icon/circle-check.svg" alt="icon" />
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Exchange info modal -->
+    <div
+      class="modal fade bg-gradient-add"
+      id="exchange-info-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-md">
+        <div class="modal-content custom-modal">
+          <div
+            class="modal-header-area d-flex align-items-center justify-content-between"
+          >
+            <h4 class="title-md">Exchange Information</h4>
+            <div class="modal-close-btn pointer">
+              <span data-bs-dismiss="modal" aria-label="Close">
+                <img src="assets/images/icon/close-square.svg" alt="" />
+              </span>
+            </div>
+          </div>
+          <div class="modal-body-inner mt-4">
+            <ul class="d-flex flex-column gap-2 exchange-info-list">
+              <li
+                class="d-flex align-items-center justify-content-between flex-wrap gap-1"
+              >
+                <span>Exchange Time</span> <span>20-08-2023, 21:30</span>
+              </li>
+              <li
+                class="d-flex align-items-center justify-content-between flex-wrap gap-1"
+              >
+                <span>Account Number</span> <span>3311440015641, EBL</span>
+              </li>
+              <li
+                class="d-flex align-items-center justify-content-between flex-wrap gap-1"
+              >
+                <span>Tex Hash</span> <span>0x6f9...8f0b2</span>
+              </li>
+              <li
+                class="d-flex align-items-center justify-content-between flex-wrap gap-1"
+              >
+                <span>Exchange Rate</span> <span> 1 ECM ≈ 146.13 BDT</span>
+              </li>
+              <li
+                class="d-flex align-items-center justify-content-between flex-wrap gap-1"
+              >
+                <span>Send ECM</span> <span>100.20</span>
+              </li>
+              <li
+                class="d-flex align-items-center justify-content-between flex-wrap gap-1"
+              >
+                <span>Exchange Amount</span> <span>40,540 BDT</span>
+              </li>
+              <li
+                class="d-flex align-items-center justify-content-between flex-wrap gap-1"
+              >
+                <span>Status</span>
+                <span class="status complete-status"
+                  ><img src="assets/images/icon/checked.svg" alt="icon" />
+                  Completed</span
+                >
+              </li>
+              <li
+                class="d-flex align-items-center justify-content-between flex-wrap gap-1"
+              >
+                <span>Transaction Complete Time</span>
+                <span>20-08-2023, 21:30</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Start history area -->
     <section class="history-section mt-60">
       <div class="container">
@@ -250,7 +505,241 @@
         </div>
       </div>
     </section>
-    <!-- End history area -->
+    <section class="history-section mt-60">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table">
+              <h4 class="title-md">Transaction History</h4>
+              <div class="table-responsive-xxl">
+                <table class="w-100 mt-4 table">
+                  <tr>
+                    <th>Exchange Time</th>
+                    <th>Account Number</th>
+                    <th>Types</th>
+                    <th>Tex Hash</th>
+                    <th>ECM</th>
+                    <th>Exchange Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                  <tr>
+                    <td>20-08-2023 21:30</td>
+                    <td>3311440015641, EBL</td>
+                    <td>Exchange</td>
+                    <td>0x6f9...8f0b2</td>
+                    <td>100.20</td>
+                    <td>45,800 BDT</td>
+                    <td>
+                      <span class="status pending-status"
+                        ><img
+                          src="assets/images/icon/timer-pause.svg"
+                          alt="icon"
+                        />
+                        Pending</span
+                      >
+                    </td>
+                    <td>
+                      <ul
+                        class="d-flex align-items-center gap-1 justify-content-center flex-wrap"
+                      >
+                        <li>
+                          <button
+                            class="status complete-status"
+                            data-bs-toggle="modal"
+                            data-bs-target="#confirm-modal"
+                          >
+                            <img
+                              src="assets/images/icon/checked.svg"
+                              alt="icon"
+                            />
+                            Make As Complete
+                          </button>
+                        </li>
+
+                        <li>
+                          <button
+                            class="outline-btn-sm"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exchange-info-modal"
+                          >
+                            <img src="assets/images/icon/eye.svg" alt="icon" />
+                            View
+                          </button>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>20-08-2023 21:30</td>
+                    <td>3311440015641, EBL</td>
+                    <td>Exchange</td>
+                    <td>0x6f9...8f0b2</td>
+                    <td>100.20</td>
+                    <td>45,800 BDT</td>
+                    <td>
+                      <span class="status complete-status"
+                        ><img src="assets/images/icon/checked.svg" alt="icon" />
+                        Completed</span
+                      >
+                    </td>
+                    <td>
+                      <ul
+                        class="d-flex align-items-center gap-1 justify-content-center flex-wrap"
+                      >
+                        <li>
+                          <button
+                            class="status complete-status"
+                            data-bs-toggle="modal"
+                            data-bs-target="#confirm-modal"
+                          >
+                            <img
+                              src="assets/images/icon/checked.svg"
+                              alt="icon"
+                            />
+                            Make As Complete
+                          </button>
+                        </li>
+
+                        <li>
+                          <button
+                            class="outline-btn-sm disable-cursor"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exchange-info-modal"
+                          >
+                            <img src="assets/images/icon/eye.svg" alt="icon" />
+                            View
+                          </button>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="history-section mt-60">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table">
+              <h4 class="title-md">Bulk Transactions</h4>
+              <div class="table-responsive-xxl">
+                <table class="w-100 mt-4 table">
+                  <tr>
+                    <th>SL</th>
+                    <th>Receiver Address</th>
+                    <th>Amount (ECM)</th>
+                    <th>
+                      <div class="d-flex justify-content-center">
+                        <button
+                          class="outline-btn bg-green border-green"
+                          data-bs-toggle="modal"
+                          data-bs-target="#add-bulk-modal"
+                        >
+                          <img
+                            src="assets/images/icon/add-more.svg"
+                            alt="icon"
+                          />
+                          Add More
+                        </button>
+                      </div>
+                    </th>
+                  </tr>
+                  <tr>
+                    <td class="text-center">1</td>
+                    <td class="text-center">
+                      <span id="wallet-address"
+                        >0x88f238f0D94a43D766bfCe0bee61a8A7e778C4Ea</span
+                      >
+                    </td>
+                    <td class="text-center">100.20</td>
+
+                    <td>
+                      <div class="d-flex justify-content-center">
+                        <button
+                          class="outline-btn bg-red border-red"
+                          data-bs-toggle="modal"
+                          data-bs-target="#remove-modal"
+                        >
+                          <img
+                            src="assets/images/icon/remove.svg"
+                            alt="remove"
+                          />
+                          Remove
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">2</td>
+                    <td class="text-center">
+                      0x88f238f0D94a43D766bfCe0bee61a8A7e778C4Ea
+                    </td>
+                    <td class="text-center">100.20</td>
+
+                    <td>
+                      <div class="d-flex justify-content-center">
+                        <button
+                          class="outline-btn bg-red border-red"
+                          data-bs-toggle="modal"
+                          data-bs-target="#remove-modal"
+                        >
+                          <img
+                            src="assets/images/icon/remove.svg"
+                            alt="remove"
+                          />
+                          Remove
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">3</td>
+                    <td class="text-center">
+                      0x88f238f0D94a43D766bfCe0bee61a8A7e778C4Ea
+                    </td>
+                    <td class="text-center">100.20</td>
+
+                    <td>
+                      <div class="d-flex justify-content-center">
+                        <button
+                          class="outline-btn bg-red border-red"
+                          data-bs-toggle="modal"
+                          data-bs-target="#remove-modal"
+                        >
+                          <img
+                            src="assets/images/icon/remove.svg"
+                            alt="remove"
+                          />
+                          Remove
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="row align-items-center">
+              <div class="col-sm-6">
+                <p class="mb-0">Total: 3</p>
+              </div>
+              <div class="col-sm-6">
+                <button class="primary-btn w-100 justify-content-center">
+                  <img
+                    src="assets/images/icon/arrow-right-left.svg "
+                    alt="icon"
+                  />Transfer All
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- start footer area  -->
     <footer class="footer-area text-center p-3 mt-3">
@@ -268,9 +757,30 @@
       const fullAddress = "0xE476367c4e776367c4e7d117429";
       const start = fullAddress.slice(0, 8);
       const end = fullAddress.slice(-4);
-      document.getElementById(
-        "wallet-address"
-      ).innerHTML = `${start}<span style="color:#999;">...</span>${end}`;
+      const formatted = `${start}<span style="color:#999;">...</span>${end}`;
+
+      document.querySelectorAll("#wallet-address").forEach((el) => {
+        el.innerHTML = formatted;
+      });
+    </script>
+
+    <script>
+      function toggleDropdown() {
+        const list = document.getElementById("dropdownList");
+        list.style.display = list.style.display === "block" ? "none" : "block";
+      }
+
+      function selectCurrency(li) {
+        document.getElementById("selectedText").textContent =
+          li.textContent.trim();
+
+        const iconBox = document.getElementById("currencyIconBox");
+        iconBox.innerHTML = "";
+        const img = li.querySelector("img");
+        if (img) iconBox.appendChild(img.cloneNode(true));
+
+        document.getElementById("dropdownList").style.display = "none";
+      }
     </script>
   </body>
 </html>
