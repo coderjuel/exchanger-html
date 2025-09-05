@@ -220,7 +220,7 @@ button:focus {
   transform: translateY(-50%);
 }
 .circle-effect-2 {
-  right: -8%;
+  right:0%;
   top: -6%;
 }
 .animate-icon {
