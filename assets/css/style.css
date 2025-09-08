@@ -193,9 +193,26 @@ button:focus {
   border-radius: 8px;
   padding: 8px 20px;
 }
+
+.input-group select option{
+  background-color: #040C17;
+}
+.input-group
 .form-control::placeholder {
   color: #4b4b4b;
 }
+.input-group select{
+  padding:13px 20px ;
+}
+select {
+  appearance: none;         /* Standard */
+  -webkit-appearance: none; /* Safari/Chrome */
+  -moz-appearance: none;    /* Firefox */
+  background: none;         /* Optional: remove background */
+  border: 1px solid #ccc;   /* Optional: custom border */
+  padding: 8px;             /* Optional: spacing */
+}
+
 .form-control:focus {
   box-shadow: 0 0 0 0 transparent !important;
   outline: none;
@@ -520,4 +537,7 @@ select {
 }
 .bg-white-5{
   background-color: #FFFFFF0D;
+}
+.dashed-line{
+  border-bottom: 1px dashed rgb(90, 89, 89);
 }
